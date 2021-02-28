@@ -460,7 +460,7 @@ contract yBALKAN is Context, IBEP20, Ownable {
     address[] private _excluded;
     
     string  private constant _NAME = 'yBALKAN';
-    string  private constant _SYMBOL = 'PBLK';
+    string  private constant _SYMBOL = 'yBLK';
     uint8   private constant _DECIMALS = 8;
    
     uint256 private constant _MAX = ~uint256(0);
