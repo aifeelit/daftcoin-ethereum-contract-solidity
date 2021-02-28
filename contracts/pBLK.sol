@@ -1,5 +1,5 @@
 /**
-// yOUearn is a deflationary token with a 0.5-10% adjustable redistribution tax & 0.5-10% burn rate
+// pBLK is a deflationary token with a 0.5-10% adjustable redistribution tax & 0.5-10% burn rate
 */
 
 pragma solidity ^0.6.0;
