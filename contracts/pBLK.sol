@@ -459,8 +459,8 @@ contract pblk is Context, IBEP20, Ownable {
     mapping (address => bool) private _isExcluded;
     address[] private _excluded;
     
-    string  private constant _NAME = 'pblk.finance';
-    string  private constant _SYMBOL = 'pBLK';
+    string  private constant _NAME = 'yBALKAN';
+    string  private constant _SYMBOL = 'PBLK';
     uint8   private constant _DECIMALS = 8;
    
     uint256 private constant _MAX = ~uint256(0);
