@@ -467,7 +467,7 @@ contract yBALKAN is Context, IBEP20, Ownable {
     uint256 private constant _DECIMALFACTOR = 10 ** uint256(_DECIMALS);
     uint256 private constant _GRANULARITY = 100;
     
-    uint256 private _tTotal = 92300 * _DECIMALFACTOR;
+    uint256 private _tTotal = 92300000 * _DECIMALFACTOR;
     uint256 private _rTotal = (_MAX - (_MAX % _tTotal));
     
     uint256 private _tFeeTotal;
