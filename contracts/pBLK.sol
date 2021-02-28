@@ -448,7 +448,7 @@ contract Ownable is Context {
     }
 }
 
-contract pblk is Context, IBEP20, Ownable {
+contract yBALKAN is Context, IBEP20, Ownable {
     using SafeMath for uint256;
     using Address for address;
 
