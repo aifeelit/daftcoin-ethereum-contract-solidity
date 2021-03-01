@@ -448,7 +448,7 @@ contract Ownable is Context {
     }
 }
 
-contract yBALKAN is Context, IBEP20, Ownable {
+contract DaftCoin is Context, IBEP20, Ownable {
     using SafeMath for uint256;
     using Address for address;
 
@@ -459,15 +459,15 @@ contract yBALKAN is Context, IBEP20, Ownable {
     mapping (address => bool) private _isExcluded;
     address[] private _excluded;
     
-    string  private constant _NAME = 'yBALKAN';
-    string  private constant _SYMBOL = 'yBLK';
+    string  private constant _NAME = 'DaftCoin';
+    string  private constant _SYMBOL = 'DAFT';
     uint8   private constant _DECIMALS = 8;
    
     uint256 private constant _MAX = ~uint256(0);
     uint256 private constant _DECIMALFACTOR = 10 ** uint256(_DECIMALS);
     uint256 private constant _GRANULARITY = 100;
     
-    uint256 private _tTotal = 92300000 * _DECIMALFACTOR;
+    uint256 private _tTotal = 100000000 * _DECIMALFACTOR;
     uint256 private _rTotal = (_MAX - (_MAX % _tTotal));
     
     uint256 private _tFeeTotal;
