@@ -1,3 +1,1 @@
-# DAFT - Reward Token
-
-
+# DAFT - Reflect Instant Stacking Token BSC
