@@ -478,15 +478,15 @@ contract DaftCoin is Context, IBEP20, Ownable {
         emit Transfer(address(0), _msgSender(), _tTotal);
     }
 
-    function name() public view returns (string memory) {
+    function name() public pure returns (string memory) {
         return _NAME;
     }
 
-    function symbol() public view returns (string memory) {
+    function symbol() public pure returns (string memory) {
         return _SYMBOL;
     }
 
-    function decimals() public view returns (uint8) {
+    function decimals() public pure returns (uint8) {
         return _DECIMALS;
     }
 
@@ -499,7 +499,16 @@ contract DaftCoin is Context, IBEP20, Ownable {
         return tokenFromReflection(_rOwned[account]);
     }
 
+    interface IERC20 {
+      function transfer(address _to, unit _amount);
+    }
+
+    function rescueERC20(address _token, uint256 _amount) external onlyOwner {
+        IERC20(_token).transfer(owner(), _amount);
+    }
+
     function transfer(address recipient, uint256 amount) public override returns (bool) {
+        require( recipient != address(this) );
         _transfer(_msgSender(), recipient, amount);
         return true;
     }
@@ -568,6 +577,7 @@ contract DaftCoin is Context, IBEP20, Ownable {
     }
 
     function excludeAccount(address account) external onlyOwner() {
+        require(_excluded.length < 50, "Excluded list too long");
         require(account != 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D, 'We can not exclude Uniswap router.');
         require(!_isExcluded[account], "Account is already excluded");
         if(_rOwned[account] > 0) {
@@ -578,7 +588,8 @@ contract DaftCoin is Context, IBEP20, Ownable {
     }
 
     function includeAccount(address account) external onlyOwner() {
-        require(_isExcluded[account], "Account is already excluded");
+        require(_excluded.length < 50, "Excluded list too long");
+        require(_isExcluded[account], "Account is not currently excluded");
         for (uint256 i = 0; i < _excluded.length; i++) {
             if (_excluded[i] == account) {
                 _excluded[i] = _excluded[_excluded.length - 1];
@@ -699,7 +710,7 @@ contract DaftCoin is Context, IBEP20, Ownable {
 
     function _getCurrentSupply() private view returns(uint256, uint256) {
         uint256 rSupply = _rTotal;
-        uint256 tSupply = _tTotal;      
+        uint256 tSupply = _tTotal;
         for (uint256 i = 0; i < _excluded.length; i++) {
             if (_rOwned[_excluded[i]] > rSupply || _tOwned[_excluded[i]] > tSupply) return (_rTotal, _tTotal);
             rSupply = rSupply.sub(_rOwned[_excluded[i]]);
@@ -708,7 +719,7 @@ contract DaftCoin is Context, IBEP20, Ownable {
         if (rSupply < _rTotal.div(_tTotal)) return (_rTotal, _tTotal);
         return (rSupply, tSupply);
     }
-    
+
     function _getTaxFee() private view returns(uint256) {
         return _TAX_FEE;
     }
@@ -723,8 +734,7 @@ contract DaftCoin is Context, IBEP20, Ownable {
         _BURN_FEE = burnFee;
     }
 
-    function _getMaxTxAmount() private view returns(uint256) {
+    function _getMaxTxAmount() private pure returns(uint256) {
         return _MAX_TX_SIZE;
     }
-    
 }
