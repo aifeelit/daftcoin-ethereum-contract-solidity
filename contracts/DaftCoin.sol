@@ -508,7 +508,6 @@ contract DaftCoin is Context, IBEP20, Ownable {
     }
 
     function transfer(address recipient, uint256 amount) public override returns (bool) {
-        require( recipient != address(this) );
         _transfer(_msgSender(), recipient, amount);
         return true;
     }
@@ -610,6 +609,8 @@ contract DaftCoin is Context, IBEP20, Ownable {
     }
 
     function _transfer(address sender, address recipient, uint256 amount) private {
+        require( _to != address(this) );
+
         require(sender != address(0), "BEP20: transfer from the zero address");
         require(recipient != address(0), "BEP20: transfer to the zero address");
         require(amount > 0, "Transfer amount must be greater than zero");
