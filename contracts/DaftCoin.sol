@@ -587,7 +587,6 @@ contract DaftCoin is Context, IBEP20, Ownable {
     }
 
     function includeAccount(address account) external onlyOwner() {
-        require(_excluded.length < 50, "Excluded list too long");
         require(_isExcluded[account], "Account is not currently excluded");
         for (uint256 i = 0; i < _excluded.length; i++) {
             if (_excluded[i] == account) {
@@ -609,7 +608,7 @@ contract DaftCoin is Context, IBEP20, Ownable {
     }
 
     function _transfer(address sender, address recipient, uint256 amount) private {
-        require( _to != address(this) );
+        require( recipient != address(this) );
 
         require(sender != address(0), "BEP20: transfer from the zero address");
         require(recipient != address(0), "BEP20: transfer to the zero address");
